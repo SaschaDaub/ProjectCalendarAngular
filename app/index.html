@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en" ng-app="calendarApp">
+<head>
+    <meta charset="utf-8">
+    <title>Project Calendar</title>
+    <link href="../app/app.css" rel="stylesheet" type="text/css"/>
+    <link href="../app/all.css" rel="stylesheet" type="text/css"/>
+    <link href="../node_modules/fullcalendar.css" rel="stylesheet" type="text/css"/>
+    <link href='../node_modules/core/main.css' rel='stylesheet' type="text/css"/>
+    <link href='../node_modules/daygrid/main.css' rel='stylesheet' type="text/css"/>
+    <link href='../node_modules/list/main.css' rel='stylesheet' type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link href="/app/navigation-tabs/navigation-tabs-template.html" rel="import"/>
+    <link href="/app/calendar/calendar-template.html" rel="import"/>
+    <link href="/app/appointments/appointments-template.html" rel="import"/>
+    <link href="/app/polls/polls-template.html" rel="import"/>
+
+    <script type="text/javascript" src="../node_modules/angular.js"></script>
+    <script type="text/javascript" src="../node_modules/moment.js"></script>
+    <script type="text/javascript" src="../node_modules/jquery.js"></script>
+    <script type="text/javascript" src="../node_modules/calendar.js"></script>
+    <script type="text/javascript" src="../node_modules/fullcalendar.js"></script>
+    <script type="text/javascript" src="../node_modules/gcal.js"></script>
+    <script type="text/javascript" src="../node_modules/core/main.js"></script>
+    <script type="text/javascript" src="../node_modules/daygrid/main.js"></script>
+    <script type="text/javascript" src="../node_modules/interaction/main.js"></script>
+    <script type="text/javascript" src="../node_modules/moment/main.js"></script>
+    <script type="text/javascript" src="../node_modules/list/main.js"></script>
+
+    <script type="text/javascript" src="../app/app.module.js"></script>
+    <script type="text/javascript" src="../app/app.config.js"></script>
+    <script type="text/javascript" src="../node_modules/angular-route.js"></script>
+    <script type="text/javascript" src="../app/login/login-module.js"></script>
+    <script type="text/javascript" src="../app/login/login-service.js"></script>
+    <script type="text/javascript" src="../app/login/login-controller.js"></script>
+    <script type="text/javascript" src="../app/login/login-directive.js"></script>
+    <script type="text/javascript" src="../app/navigation-tabs/navigation-tabs-module.js"></script>
+    <script type="text/javascript" src="../app/navigation-tabs/navigation-tabs-service.js"></script>
+    <script type="text/javascript" src="../app/navigation-tabs/navigation-tabs-controller.js"></script>
+    <script type="text/javascript" src="../app/navigation-tabs/navigation-tabs-directive.js"></script>
+    <script type="text/javascript" src="../app/calendar/calendar-module.js"></script>
+    <script type="text/javascript" src="../app/calendar/calendar-service.js"></script>
+    <script type="text/javascript" src="../app/calendar/calendar-controller.js"></script>
+    <script type="text/javascript" src="../app/calendar/calendar-directive.js"></script>
+    <script type="text/javascript" src="../app/calendar/modal-directive.js"></script>
+    <script type="text/javascript" src="../app/appointments/appointments-module.js"></script>
+    <script type="text/javascript" src="../app/appointments/appointments-service.js"></script>
+    <script type="text/javascript" src="../app/appointments/appointments-controller.js"></script>
+    <script type="text/javascript" src="../app/appointments/appointments-directive.js"></script>
+    <script type="text/javascript" src="../app/polls/polls-module.js"></script>
+    <script type="text/javascript" src="../app/polls/polls-service.js"></script>
+    <script type="text/javascript" src="../app/polls/polls-controller.js"></script>
+    <script type="text/javascript" src="../app/polls/polls-directive.js"></script>
+</head>
+<body>
+<navi-bar id="naviBar"></navi-bar>
+<div id="mainWrapper" class="flex-container">
+    <div id="topBar">
+        <label id="currentTabText">Project Calendar</label>
+    </div>
+    <div class="view-container">
+        <div ng-view class="view-frame"></div>
+    </div>
+    <div class="modal" tabindex="-1" role="dialog" usage="">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Event</h5>
+                    <button type="button" class="close btn-close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="labelWrapper">
+                        <label>Title:</label>
+                        <br>
+                        <label>Start Date:</label>
+                        <br>
+                        <label>End Date:</label>
+                        <br>
+                        <label>Color:</label>
+                        <br>
+                        <label>Text Color:</label>
+                    </div>
+                    <div id="inputWrapper">
+                        <input type="text" id="newEventTitle" class="mainInput">
+                        <br>
+                        <input type="date" id="newEventStartDate" class="mainInput"><input type="time"
+                                                                                           id="newEventStartTime">
+                        <br>
+                        <input type="date" id="newEventEndDate" class="mainInput"><input type="time"
+                                                                                         id="newEventEndTime">
+                        <br>
+                        <input type="color" id="newEventColor" value="#2e97a6" class="mainInput">
+                        <br>
+                        <input type="color" id="newEventTextColor" value="#ffffff">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btn-confirm" ng-click="confirmButtonHandler()" modal-control>Confirm</button>
+                    <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

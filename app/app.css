@@ -1,0 +1,504 @@
+#naviBar {
+  min-height: 100%;
+  height:auto !important;
+  height:100%;
+  width: 5%;
+  width: auto !important;
+  min-width: min-content;
+  max-width: min-content;
+  float: left;
+  background-color: #3eb7c9;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  min-width: 1515px;
+  min-height: 600px;
+}
+
+html, body {
+  height:100%;
+  font-family: Open Sans !important;
+}
+
+#naviButtons {
+  margin-top: 124%;
+  margin-bottom: auto;
+  font-size: 30px;
+  list-style: none;
+  color: #216670;
+  padding: inherit;
+}
+
+#calendarIcon {
+  border-top-style: solid;
+  border-top-width: 0.5px;
+}
+
+#appointmentIcon {
+  border-top-style: solid;
+  border-top-width: 0.5px;
+  border-bottom-style: solid;
+  border-bottom-width: 0.5px;
+}
+
+#pollIcon {
+  border-bottom-style: solid;
+  border-bottom-width: 0.5px;
+}
+
+#naviButtons a {
+  font-size: 160%;
+  color: #216670;
+  background-color: transparent;
+  border: none;
+  margin: 1rem;
+}
+
+#naviButtons a:hover {
+  font-size: 160%;
+  color: white;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin: 1rem;
+}
+
+#naviButtons li {
+  text-align: center;
+}
+
+#lastIconListElement {
+  border-bottom-style: solid;
+  border-bottom-width: 0.5px;
+}
+
+#accountIcon {
+  border-radius: 50%;
+  padding: 0.5625rem;
+  margin-left: 16%;
+  margin-top: 1rem;
+  color: #216670;
+  background-color: #2e97a6;
+  text-align: center;
+  font-size: 225%;
+}
+
+#logOutIconDiv {
+  color: #216670;
+  text-align: center;
+  margin-top: auto;
+}
+
+#logOutIcon {
+  color: #216670;
+  font-size: 160%;
+  transform: scale(-1);
+}
+
+#logOutIcon:hover {
+  color: white;
+}
+
+#logOutIconDiv:hover {
+  color: white;
+  cursor: pointer;
+}
+
+#logOutIcon label {
+  font-family: Open Sans;
+  font-size:100%;
+}
+
+#topBar {
+  height: 5rem;
+  width: 100%;
+  background-color: #3f4d4f;
+}
+
+.clicked {
+  border-color: white !important;
+  background-color: #45c9de;
+}
+
+.clicked a {
+  color: white !important;
+}
+
+#currentTabText {
+  margin-left: 1rem;
+  color: white;
+  font-family: Open Sans;
+  font-size: xx-large;
+}
+
+#mainContent {
+  width: auto !important;
+  min-width: 95%;
+  width: 100%;
+  height: auto !important;
+  height: 100%;
+  min-height: 100%;
+}
+
+.fc-toolbar.fc-header-toolbar {
+  margin-bottom: 1em;
+  height: 2em;
+}
+
+#mainWrapper {
+  height: 100%;
+  min-height: 100%;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10; /* may vary */
+  background: rgba(0,0,0,0.5); /* could also include a 1px fallback png for older browsers */
+}
+
+#modal {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  padding: 20px;
+  width: 25%;
+  background: white;
+  border-top-style: solid;
+  border-color: #45c9de;
+  border-top-width: 2.6875rem;
+}
+
+#close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  background: #f2456f;
+}
+#close:hover {
+  cursor: pointer;
+}
+
+.modal-content {
+  text-align: left;
+}
+
+.modal-content h4 {
+  text-align: center;
+}
+
+#confirmNewEvent {
+  background-color: #f2f2f2;
+  margin-top: 2%;
+  margin-left: 76%;
+}
+
+#confirmNewEvent:hover {
+  cursor: pointer;
+  background-color: darkgrey;
+}
+
+.fc-right {
+  margin-left: 25%;
+}
+
+.fc-center {
+  margin-left: 25%;
+}
+
+.fc-icon:after {
+  top: -90% !important;
+}
+
+.mainInput{
+  margin-bottom: 3%;
+}
+
+#inputWrapper input[type=date] {
+  margin-right: 1rem;
+}
+
+#labelWrapper label {
+  margin-bottom: 16%;
+}
+
+#inputWrapper {
+  float: right;
+  text-align: left;
+  margin-right: 10%;
+}
+
+#labelWrapper {
+  text-align: right;
+  float: left;
+  margin-left: 10%;
+}
+
+.modal-header {
+  background-color: #3eb7c9;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #216670 !important;
+  border-color: #216670 !important;
+}
+
+.btn-primary {
+  background-color: #3eb7c9 !important;
+  border-color: #3eb7c9 !important;
+}
+
+.modal-edit {
+  background-color: #216670 !important;
+}
+
+#delete-button {
+  background-color: #f2456f;
+  color: white;
+  margin-left: 2%;
+}
+
+#delete-button:hover {
+  background-color: #ad3250;
+}
+
+#mainContent button {
+  border: none !important;
+  border-radius: 17px;
+  background-color: #3eb7c9 !important;
+  background-image: none !important;
+}
+
+#mainContent button:hover {
+  background-position: 0 !important;
+  background-color: #45c9de !important;
+  -webkit-transition: background-position 0s !important;
+  -moz-transition: background-position 0s !important;
+  -o-transition: background-position 0s !important;
+  transition: background-position 0s !important;
+}
+
+.fc-header-toolbar {
+  height: 2.1em !important;
+  line-height: 2.1em !important;
+  margin-top: 1.5em;
+}
+
+.fc-state-active {
+  color: white !important;
+  background-color: #45c9de !important;
+}
+
+.fc-left {
+  margin-left: 1%;
+  width: 20%;
+}
+
+.fc-right {
+  width: 16%;
+}
+
+.comingEvents {
+  margin-left: 2%;
+  height: 65%;
+}
+
+#comingEventsList {
+  display: flex;
+  flex-flow: column wrap;
+  max-height: 100%;
+  height: auto;
+}
+
+.currentEvents {
+  margin-left: 2%;
+  height: 30%;
+}
+
+#currentEventsList {
+  height: auto;
+  max-height: 100%;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.eventName {
+  margin-left: 4%;
+  margin-right: 2%;
+  float: left;
+}
+
+#newPollDiv {
+  border-radius: 25px;
+  background-color: #3eb7c9;
+  margin-top: 1%;
+  width: 10%;
+  margin-left: 1%;
+  height: 5%;
+  height: auto !important;
+  min-height: 5%;
+  opacity: 1;
+  font-size: 100%;
+}
+
+#newPollDiv:hover {
+  background-color: #45c9de;
+  cursor: pointer;
+}
+
+#newPollIcon {
+  margin-left: 8%;
+  margin-top: 7%;
+  color: white;
+}
+
+#newPollText {
+  color: white;
+  margin-left: 5%;
+}
+
+ul {
+  list-style: none;
+}
+
+.comingEventsList li {
+  text-align: end;
+  width: 10%;
+  margin-bottom: 1%;
+}
+
+.eventsOverviewWrapper h4 {
+  margin-bottom: 1em;
+  width: 100%;
+}
+
+.fc-button-group button:hover{
+  color: white;
+}
+
+#calendarPar {
+  height: 45%;
+}
+
+#eventsOverviewWrapper {
+  height: 50%;
+  margin-top: 2%;
+}
+
+.animate {
+}
+
+/* Full-width inputs */
+.loginInput {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+#loginButton {
+  background-color: #3eb7c9;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Add a hover effect for buttons */
+#loginButton:hover {
+  opacity: 0.8;
+}
+
+/* Extra style for the cancel button (red) */
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+/* Add padding to containers */
+.container {
+  padding: 16px;
+}
+
+/* The "Forgot password" text */
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+    display: block;
+    float: none;
+  }
+  .cancelbtn {
+    width: 100%;
+  }
+}
+
+.hidden {
+  display: none !important;
+}
+
+.view-container {
+  height: 91%;
+}
+
+.view-frame {
+  height: 97.7%;
+}
+
+calendar-control {
+  height: 100%;
+}
+
+#currentTabText {
+  width: 99%;
+}
+
+#saveIcon {
+  color: lightgrey;
+  background-color: darkgrey;
+  padding: 0.25em;
+  margin-left: 0.5%;
+}
+
+.active {
+  background-color: #3eb7c9 !important;
+  color: #3c3c3c !important;
+}
+
+.active:hover {
+  background-color: #45c9de !important;
+  color: white !important;
+  cursor: pointer;
+}

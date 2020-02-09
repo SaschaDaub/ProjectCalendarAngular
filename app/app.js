@@ -287,7 +287,20 @@ app.get("/webfonts/fa-solid-900.ttf", (req, res) => {
 });
 
 app.post("/load_events", (request, response) => {
-	accessDatabase("SELECT * FROM dbo.kp_events WHERE userFk=" + request.body.userId)
+		accessDatabase("SELECT * FROM dbo.kp_events WHERE userFk=" + request.body.userId)
+			.then( function(res) {
+				if (res.recordset.length > 0) {
+					response.send(res.recordset);
+				} else {
+					response.send([]);
+				}
+			}).catch( function(err) {
+			throw err;
+		});
+});
+
+app.post("/global_events", (request, response) => {
+	accessDatabase("SELECT * FROM dbo.kp_events WHERE global=1 AND NOT userfk=" + request.body.userId)
 		.then( function(res) {
 			if (res.recordset.length > 0) {
 				response.send(res.recordset);
@@ -297,19 +310,22 @@ app.post("/load_events", (request, response) => {
 		}).catch( function(err) {
 		throw err;
 	});
-
-
 });
 
 app.post("/save_events", (request, response) => {
 	if (request) {
 		var eventList = request.body.new_events;
 		var deleteList = request.body.deleted_events;
+		var editList = request.body.edited_events;
 	}
 
 	if (eventList) {
 		eventList.forEach(function (event, index) {
-			accessDatabase("INSERT INTO dbo.kp_events (title, startdate, enddate, color, textcolor, userfk) VALUES( '" + event.title + "', '" + event.start + "', '" + event.end + "', '" + event.color + "', '" + event.textColor + "', " + event.userFk + ")")
+			var global = 0;
+			if (event.global == true) {
+				global = 1;
+			}
+			accessDatabase("INSERT INTO dbo.kp_events (title, startdate, enddate, color, textcolor, userfk, global) VALUES( '" + event.title + "', '" + event.start + "', '" + event.end + "', '" + event.color + "', '" + event.textColor + "', " + event.userFk + " , " + global + ")")
 				.then(function (res) {
 					response.send({successful: true});
 				}).catch( function(err) {
@@ -319,13 +335,28 @@ app.post("/save_events", (request, response) => {
 	}
 
 	if (deleteList) {
-		deleteList.forEach(function (event, index) {
+		deleteList.forEach(function(event, index) {
 			accessDatabase("DELETE FROM dbo.kp_events WHERE id=" + event.id)
 				.then(function(res) {
 					response.send({successful: true});
 				}).catch( function(err) {
 				throw err;
 			});
+		});
+	}
+
+	if (editList) {
+		editList.forEach(function(event, index) {
+			var global = 0;
+			if (event.global == true) {
+				global = 1;
+			}
+			accessDatabase("UPDATE dbo.kp_events SET title='" + event.title + "', startdate='" + event.start + "', enddate='" + event.end + "', color='" + event.color + "', textcolor='" + event.textColor + "', global=" + global + "WHERE id=" + event.id)
+				.then(function(res) {
+					response.send({successful: true, res: res});
+				}).catch( function (err) {
+				throw err;
+			})
 		});
 	}
 });
@@ -337,12 +368,16 @@ app.post("/log_in", (request, response) => {
 	accessDatabase("SELECT id, username, password FROM dbo.kp_profile WHERE username='" + userInputUname + "' AND password='" + userInputPsw + "'")
 		.then( function(res) {
 			var isRegistered = false;
+			var userId;
 
 			if (res.recordset.length > 0) {
 				isRegistered = true;
+				userId = res.recordset[0].id;
+			} else {
+				userId = 0;
 			}
 
-			response.send({isRegistered: isRegistered, userId:res.recordset[0].id});
+			response.send({isRegistered: isRegistered, userId:userId});
 		}).catch( function(err) {
 		throw err;
 	});

@@ -15,6 +15,7 @@ mainApp.run(function ($rootScope) {
     var loggedIn = window.localStorage.getItem('isLoggedIn');
     var isLoggedIn = JSON.parse(loggedIn);
     $rootScope.events_array = [];
+    $rootScope.global_events = [];
 
     if(isLoggedIn) {
         var difference = appTimeStamp - isLoggedIn.timeStamp;

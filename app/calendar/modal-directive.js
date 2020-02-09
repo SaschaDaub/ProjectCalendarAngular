@@ -15,7 +15,8 @@ angular.module('calendar').directive('modalControl', ['$rootScope', function ($r
                     endTime: $('#newEventEndTime')[0].value,
                     color: $('#newEventColor')[0].value,
                     textColor: $('#newEventTextColor')[0].value,
-                    id: scope.clickedEvent.id
+                    id: $rootScope.clickedEvent.id,
+                    global: $('#newEventGlobal')[0].checked
                 };
                 scope.confirmButtonClickEvent(modalInput);
             };

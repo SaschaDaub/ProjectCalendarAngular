@@ -22,6 +22,7 @@ angular.module('navigationTabs').directive('naviBar', ['$rootScope', '$location'
           function logOut() {
               $('#currentTabText').text('Project Calendar');
               $('#saveIcon').hide();
+              $('#reloadIcon').hide();
               $('#accountLogo').hide();
               $('#naviBar').hide();
               $('#logOutIconDiv').hide();

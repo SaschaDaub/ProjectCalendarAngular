@@ -3,7 +3,9 @@
 // Register `calendar` service
 angular.module('calendar').factory('calendarService', ['$rootScope', '$http', function ($rootScope, $http) {
     var events_array = $rootScope.events_array;
+    var global_events = $rootScope.global_events;
     var changed_new_events = [];
+    var edited_events = [];
     var deleted_events = [];
     var clickedEvent = {};
 
@@ -15,9 +17,18 @@ angular.module('calendar').factory('calendarService', ['$rootScope', '$http', fu
         return changed_new_events;
     }
 
+    function getGlobalArray() {
+        return global_events;
+    }
+
     function getEvents() {
         events_array = $rootScope.events_array;
         return events_array;
+    }
+
+    function resetEvents() {
+        events_array = [];
+        $rootScope.events_array = [];
     }
 
     function getClickedEvent() {
@@ -25,24 +36,35 @@ angular.module('calendar').factory('calendarService', ['$rootScope', '$http', fu
     }
 
     function editEvent(modalInput) {
-        clickedEvent.title = modalInput.title;
-        clickedEvent.start = modalInput.start;
-        clickedEvent.end = modalInput.end;
-        clickedEvent.color = modalInput.color;
-        clickedEvent.textColor = modalInput.textColor;
-        clickedEvent.startTime = modalInput.startTime;
-        clickedEvent.endTime = modalInput.endTime;
-        clickedEvent.id = modalInput.id;
+        events_array.forEach(function (event, index) {
+            if (event.id == modalInput.id) {
+                events_array[index].title = modalInput.title;
+                events_array[index].start = modalInput.start;
+                events_array[index].end = modalInput.end;
+                events_array[index].startTime = modalInput.startTime;
+                events_array[index].endTime = modalInput.endTime;
+                events_array[index].allDay = modalInput.allDay;
+                events_array[index].color = modalInput.color;
+                events_array[index].textColor = modalInput.textColor;
+                events_array[index].global = modalInput.global;
+            }
+        });
+        edited_events.push({
+            id: modalInput.id,
+            title: modalInput.title,
+            start: modalInput.start,
+            end: modalInput.end,
+            startTime: modalInput.startTime,
+            endTime: modalInput.endTime,
+            allDay: modalInput.allDay,
+            color: modalInput.color,
+            textColor: modalInput.textColor,
+            userFk: $rootScope.userId,
+            global: modalInput.global
+        });
 
-        events_array[clickedEvent.id - 1].title = modalInput.title;
-        events_array[clickedEvent.id - 1].start = modalInput.start;
-        events_array[clickedEvent.id - 1].startTime = modalInput.startTime;
-        events_array[clickedEvent.id - 1].end = modalInput.end;
-        events_array[clickedEvent.id - 1].endTime = modalInput.endTime;
-        events_array[clickedEvent.id - 1].color = modalInput.color;
-        events_array[clickedEvent.id - 1].textColor = modalInput.textColor;
 
-        $rootScope.$emit('eventEdited', clickedEvent);
+        $rootScope.$emit('eventEdited', modalInput);
     }
 
     function createEvent(modalInput) {
@@ -60,7 +82,8 @@ angular.module('calendar').factory('calendarService', ['$rootScope', '$http', fu
                 allDay: modalInput.allDay,
                 color: modalInput.color,
                 textColor: modalInput.textColor,
-                userFk: $rootScope.userId
+                userFk: $rootScope.userId,
+                global: modalInput.global
             });
 
             events_array.push({
@@ -73,7 +96,8 @@ angular.module('calendar').factory('calendarService', ['$rootScope', '$http', fu
                 allDay: modalInput.allDay,
                 color: modalInput.color,
                 textColor: modalInput.textColor,
-                userFk: $rootScope.userId
+                userFk: $rootScope.userId,
+                global: modalInput.global
             });
 
             $rootScope.$emit('eventCreated', modalInput);
@@ -91,6 +115,29 @@ angular.module('calendar').factory('calendarService', ['$rootScope', '$http', fu
     $rootScope.deregisterLoadListener = $rootScope.$on('loadEvents', function (event, args) {
         loadEvents();
     });
+
+    async function getGlobal() {
+        $http.post('/global_events', {userId: $rootScope.userId})
+            .then(function (response) {
+                if (global_events.length == 0) {
+                    response.data.forEach(function (item, index) {
+                        var newEvent = {
+                            id: item.id,
+                            title: item.title,
+                            start: item.startdate,
+                            end: item.enddate,
+                            startTime: item.starttime,
+                            endTime: item.endtime,
+                            allDay: undefined,
+                            color: item.color,
+                            textColor: item.textcolor,
+                            userFk: item.userFk
+                        };
+                        global_events.push(newEvent);
+                    });
+                }
+            });
+    }
 
 
     function loadEvents() {
@@ -111,7 +158,8 @@ angular.module('calendar').factory('calendarService', ['$rootScope', '$http', fu
                                     allDay: undefined,
                                     color: item.color,
                                     textColor: item.textcolor,
-                                    userFk: item.userFk
+                                    userFk: item.userFk,
+                                    global: item.global
                                 };
                                 events_array.push(newEvent);
                             });
@@ -126,7 +174,7 @@ angular.module('calendar').factory('calendarService', ['$rootScope', '$http', fu
 
     function saveEvents() {
         console.log(changed_new_events);
-        $http.post('/save_events', {new_events: changed_new_events, deleted_events: deleted_events})
+        $http.post('/save_events', {new_events: changed_new_events, deleted_events: deleted_events, edited_events: edited_events})
             .then(function (response) {
                 console.log(response);
                 $rootScope.$emit('saveComplete');
@@ -142,7 +190,10 @@ angular.module('calendar').factory('calendarService', ['$rootScope', '$http', fu
         saveEvents: saveEvents,
         getChangedEvents: getChangedEvents,
         getDeletedEvents: getDeletedEvents,
-        deleteEvents: deleteEvents
+        deleteEvents: deleteEvents,
+        getGlobal: getGlobal,
+        getGlobalArray: getGlobalArray,
+        resetEvents: resetEvents
     };
 
 }]);

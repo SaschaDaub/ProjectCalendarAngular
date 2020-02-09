@@ -16,6 +16,8 @@ angular.module('appointments').directive('appointmentsControl', ['$rootScope' ,f
             }
             $('#currentTabText').text('Appointments');
             $('#saveIcon').hide();
+            $('#reloadIcon').hide();
+            $('#globalIcon').hide();
 
             mainContentEl.append(calendarPar);
             $('#calendar').fullCalendar({

@@ -8,6 +8,8 @@ angular.module('polls').directive('pollsControl', ['$rootScope' ,function($rootS
         link: function(scope, elem) {
             $('#currentTabText').text('Polls');
             $('#saveIcon').hide();
+            $('#reloadIcon').hide();
+            $('#globalIcon').hide();
             if($rootScope.deregisterEditedListener && $rootScope.deregisterCreatedListener) {
                 $rootScope.deregisterEditedListener();
                 $rootScope.deregisterCreatedListener();

@@ -81,8 +81,9 @@ html, body {
 #accountIcon {
   border-radius: 50%;
   padding: 0.5625rem;
-  margin-left: 16%;
+  margin-left: 15%;
   margin-top: 1rem;
+  margin-right: 15%;
   color: #216670;
   background-color: #2e97a6;
   text-align: center;
@@ -501,4 +502,27 @@ calendar-control {
   background-color: #45c9de !important;
   color: white !important;
   cursor: pointer;
+}
+
+#reloadIcon {
+  padding: 0.25em;
+}
+
+#globalIcon {
+  padding: 0.25em;
+  color: lightgrey;
+  background-color: darkgrey;
+}
+
+#globalIcon:hover {
+  color: white;
+  cursor: pointer;
+}
+
+.modal-body {
+  width: 110%;
+}
+
+#newEventGlobal {
+  margin-top: 8%;
 }

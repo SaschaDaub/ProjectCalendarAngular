@@ -12,13 +12,47 @@ angular.module('calendar').directive('calendarControl', ['$rootScope', function 
             $('#currentTabText').text('Calendar');
 
             if ($('#saveIcon').length == 0) {
-                var saveIcon = $('<i/>').addClass('fas fa-save').attr('id', 'saveIcon').attr('title', 'Save new or changed data on the calendar')
+                var saveIcon = $('<i/>').addClass('fas fa-save').attr('id', 'saveIcon').attr('title', 'Save new or changed data on the calendar.')
                     .click(function () {
                         scope.saveEvents();
                     });
                 $('#topBar').append(saveIcon);
             } else {
                 $('#saveIcon').show();
+            }
+
+            if ($('#reloadIcon').length == 0) {
+                var reloadIcon = $('<i/>').addClass('fas fa-sync-alt active').attr('id', 'reloadIcon').attr('title', 'reload the calendar.')
+                    .click(function () {
+                        $('#calendar').hide();
+                        $('#calendar').fullCalendar('removeEvents');
+                        $('#calendar').fullCalendar('renderEvents', scope.events_array, true);
+                        if($('#globalIcon').hasClass('active')) {
+                            $('#calendar').fullCalendar('renderEvents', scope.global_events, true);
+                        }
+                        $('#calendar').show();
+                    });
+                $('#topBar').append(reloadIcon);
+            } else {
+                $('#reloadIcon').show();
+            }
+
+            if ($('#globalIcon').length == 0) {
+                var globalIcon = $('<i/>').addClass('fas fa-globe-europe').attr('id', 'globalIcon').attr('title', 'activate or deactivate showing global events on the calendar.')
+                    .click(function () {
+                        if ($('#globalIcon').hasClass('active')) {
+                            $('#globalIcon').removeClass('active');
+                            scope.global_events.forEach(function(event, index) {
+                                $('#calendar').fullCalendar('removeEvents', event.id);
+                            });
+                        } else {
+                            $('#globalIcon').addClass('active');
+                            $('#calendar').fullCalendar('renderEvents', scope.global_events, true);
+                        }
+                    });
+                $('#topBar').append(globalIcon);
+            } else {
+                $('#globalIcon').show();
             }
 
             $rootScope.deregisterEditedListener = $rootScope.$on('eventEdited', function (event, args) {
@@ -44,6 +78,7 @@ angular.module('calendar').directive('calendarControl', ['$rootScope', function 
             });
 
             $rootScope.$on('eventsLoaded', function () {
+                scope.getEvents();
                 $('#calendar').fullCalendar({
                     plugins: ['interaction', 'dayGrid', 'moment'],
                     height: 'parent',
@@ -92,10 +127,10 @@ angular.module('calendar').directive('calendarControl', ['$rootScope', function 
 
                     eventDrop: function (event, delta, revertFunc) {
                         scope.events_array.forEach(function (item, index) {
-                           if (event.id == item.id){
-                               item.start = event.start;
-                               item.end = event.end;
-                           }
+                            if (event.id == item.id) {
+                                item.start = event.start;
+                                item.end = event.end;
+                            }
                         });
                         $('#calendar').fullCalendar('updateEvent', event);
                     },
@@ -130,12 +165,15 @@ angular.module('calendar').directive('calendarControl', ['$rootScope', function 
                         $('#newEventEndTime')[0].value = moment(event.end).format('HH:mm');
                         $('#newEventColor')[0].value = event.color;
                         $('#newEventTextColor')[0].value = event.textColor;
-                        scope.clickedEvent = event;
+                        $('#newEventGlobal')[0].checked = event.global;
+                        event.saveId = event.id;
+                        $rootScope.clickedEvent = event;
 
                         $modal.show();
                     }
                 });
-                $('#calendar').fullCalendar( 'updateEvents', scope.events_array);
+                $('#calendar').fullCalendar('removeEvents');
+                $('#calendar').fullCalendar('renderEvents', scope.events_array, true);
             });
         }
     };

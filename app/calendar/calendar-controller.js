@@ -7,6 +7,19 @@ angular.module('calendar').controller('calendarController', ['$scope', '$rootSco
     $scope.changed_events = calendarService.getChangedEvents();
     $scope.deleted_events = calendarService.getDeletedEvents();
 
+    calendarService.getGlobal()
+        .then(function() {
+            $scope.global_events = calendarService.getGlobalArray();
+        });
+
+    $scope.getEvents = function() {
+        $scope.events_array = calendarService.getEvents();
+    };
+
+    $scope.loadEvents = function() {
+        calendarService.loadEvents();
+    };
+
     if($rootScope.isLoggedIn == true) {
         calendarService.loadEvents();
     }
@@ -17,6 +30,15 @@ angular.module('calendar').controller('calendarController', ['$scope', '$rootSco
 
     $scope.saveEvents = function () {
         calendarService.saveEvents();
+    };
+
+    $scope.resetEvents = function () {
+        $scope.events_array = calendarService.getEvents();
+        calendarService.resetEvents();
+    };
+
+    $scope.getGlobalEvents = function () {
+        calendarService.getGlobal();
     };
 
     $scope.deleteEvents = function (event) {

@@ -23,11 +23,13 @@ angular.module('navigationTabs').directive('naviBar', ['$rootScope', '$location'
               $('#currentTabText').text('Project Calendar');
               $('#saveIcon').hide();
               $('#reloadIcon').hide();
+              $('#globalIcon').hide();
               $('#accountLogo').hide();
               $('#naviBar').hide();
               $('#logOutIconDiv').hide();
               $('.animate').removeClass('hidden').show();
               $('#loginButton').show();
+              $('#userName').remove();
 
               window.localStorage.setItem('isLoggedIn', JSON.stringify({'value': false}));
 

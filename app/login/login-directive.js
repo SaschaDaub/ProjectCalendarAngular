@@ -16,8 +16,9 @@ angular.module('login').directive('loginControl', ['$rootScope', function ($root
             $rootScope.$on('loggedIn', function (event, args) {
                 $('.animate').addClass('hidden').hide();
                 $('#accountLogo').show();
-                $('#naviBar').show();
+                $('#naviBar').prepend($('<span/>').attr('id', 'userName').text(args.userName)).show();
                 $('#logOutIconDiv').show();
+
 
                 var timeStamp = Date.now();
                 localStorage.setItem('isLoggedIn', JSON.stringify({'value': true, timeStamp: timeStamp, userId: args.userId}));

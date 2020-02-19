@@ -8,8 +8,14 @@ angular.module('calendar').directive('calendarControl', ['$rootScope', function 
         link: function (scope, elem) {
             var $modal = $('.modal');
             var $close = $('.btn-close');
+            if($rootScope.deregisterPollListener) {
+                $rootScope.deregisterPollListener();
+            }
 
             $('#currentTabText').text('Calendar');
+            if ($('#globalIcon').hasClass('active')) {
+                $('#globalIcon').removeClass('active');
+            }
 
             if ($('#saveIcon').length == 0) {
                 var saveIcon = $('<i/>').addClass('fas fa-save').attr('id', 'saveIcon').attr('title', 'Save new or changed data on the calendar.')

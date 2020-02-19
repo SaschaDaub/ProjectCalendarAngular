@@ -351,33 +351,28 @@ html, body {
   float: left;
 }
 
-#newPollDiv {
+#newPollIcon {
   border-radius: 25px;
   background-color: #3eb7c9;
-  margin-top: 1%;
-  width: 10%;
+  padding: 0.5%;
+  padding-left: 2%;
   margin-left: 1%;
-  height: 5%;
-  height: auto !important;
-  min-height: 5%;
-  opacity: 1;
-  font-size: 100%;
+  margin-top: 1%;
+  color: #2e97a6;
+  width: 12%;
+  font-size: 120%;
 }
 
-#newPollDiv:hover {
+#newPollIcon:hover {
   background-color: #45c9de;
   cursor: pointer;
 }
 
-#newPollIcon {
-  margin-left: 8%;
-  margin-top: 7%;
-  color: white;
-}
-
 #newPollText {
-  color: white;
+  color: black;
   margin-left: 5%;
+  font-family: Open Sans !important;
+  font-weight: 100;
 }
 
 ul {
@@ -525,4 +520,154 @@ calendar-control {
 
 #newEventGlobal {
   margin-top: 8%;
+}
+
+#container {
+  color: #fff;
+  background:white;
+}
+#container #question {
+  display: block;
+  padding: 20px;
+  font-weight: 500;
+  letter-spacing: -3px;
+  margin-bottom: 20px;
+  padding: 10px;
+  font-size: 230%;
+}
+#container div {
+  font-weight: 500;
+  letter-spacing: 0.25rem;
+  background: #2aabd2;
+  margin-bottom: 15px;
+  padding: 0.5rem;
+  font-size: 20px;
+  color: #ffffff;
+  border-left: 20px solid #333;
+  width: 30%;
+  -webkit-border-radius: 0.5em;
+  -moz-border-radius: 0 0.5em 0.5em 0;
+  border-radius: 0 1.5em 1.5em 0;
+}
+#container div a {
+  border-radius: 0.3em;
+  text-decoration: none;
+  color: #0099cc;
+  padding: 5px 15px;
+  background: #333;
+  margin: 0 20px;
+  cursor: pointer;
+}
+#container div a:hover {
+  color: #fff;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#pollsInputWrapper {
+  text-align: left;
+  margin-right: 10%;
+  display: flex;
+  flex-direction: column;
+}
+
+#pollsLabelWrapper {
+  text-align: right;
+  float: left;
+  margin-left: 10%;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-dialog {
+  top: 7%;
+  left: 10%;
+  min-width: 45%;
+  position: absolute !important;
+}
+
+#newPollOptionsAmount {
+  padding: 1%;
+  background-color: #3eb7c9;
+  border-radius: 100%;
+  color: white;
+}
+
+#newPollOptionsAmount:hover {
+  background-color: #2aabd2;
+  cursor: pointer;
+}
+
+#newPollOptions {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5%;
+}
+
+.optionRow {
+  display: flex;
+  flex-direction: row;
+}
+
+#newPollName {
+  width: 25%;
+  margin-left: 9%;
+}
+
+h3 {
+  margin-left: 3%;
+  margin-top: 2%;
+  color: #216670;
+}
+
+#question {
+  color: #216670;
+}
+
+#pendingPolls {
+  display: -webkit-box;
+  margin-left: 3%;
+}
+
+.pollDiv {
+  margin-left: 1%;
+  padding: 0.5%;
+  background-color: #3eb7c9;
+  border-radius: 25px;
+  color: black;
+}
+
+.pollDiv:hover {
+  cursor: pointer;
+  background-color: #45c9de;
+}
+
+.pollClicked {
+   color: white !important;
+  background-color: #45c9de !important;
+}
+
+#holder {
+  bottom: 11%;
+  left: 5em;
+  position: fixed;
+  width: -webkit-fill-available;
+}
+
+#currentEventsList div {
+  border-radius: 50px;
+}
+
+#comingEventsList div {
+  border-radius: 50px;
+}
+
+#currentEventsList li {
+  width: 25%;
+}
+
+#comingEventsList li {
+  width: 25%;
 }

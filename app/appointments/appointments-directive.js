@@ -10,9 +10,16 @@ angular.module('appointments').directive('appointmentsControl', ['$rootScope' ,f
             var calendarPar = $('<div/>').attr('id', 'calendarPar').append(calendarEl);
             var mainContentEl = $('#mainContent');
 
-            if($rootScope.deregisterEditedListener && $rootScope.deregisterCreatedListener) {
+            if($rootScope.deregisterEditedListener) {
                 $rootScope.deregisterEditedListener();
+            }
+
+            if($rootScope.deregisterCreatedListener) {
                 $rootScope.deregisterCreatedListener();
+            }
+
+            if($rootScope.deregisterPollListener) {
+                $rootScope.deregisterPollListener();
             }
             $('#currentTabText').text('Appointments');
             $('#saveIcon').hide();
@@ -56,9 +63,9 @@ angular.module('appointments').directive('appointmentsControl', ['$rootScope' ,f
                     var start = element.start;
 
                     var nameEl = $('<div/>').text(name).addClass('eventName');
-                    var startLabel = $('<div/>').text(moment(start).format('YYYY-MM-DD'));
+                    var startLabel = $('<div/>').text(moment(start).format('YYYY-MM-DD')).css('background-color', element.color);
 
-                    var eventLine = $('<li/>').append(nameEl).append(startLabel);
+                    var eventLine = $('<li/>').append(nameEl).append(startLabel).css('color', element.textColor);
                     if (diffInDays > 0 && diffInDays < 60) {
                         comingEventsList.append(eventLine);
                         counter++;

@@ -36,19 +36,21 @@ angular.module('login').factory('loginService', ['$rootScope', '$location', '$ht
     }
 
     function logIn(uname, psw) {
-        $http.post('/log_in', { userName: uname, password: psw })
-            .then(function(response) {
-                console.log(response);
-                if (response.data.isRegistered == true) {
-                    $rootScope.$emit('loggedIn', {userId: response.data.userId});
-                    $rootScope.isLoggedIn = true;
-                    $rootScope.userId = response.data.userId;
-                    $location.path('/calendar');
-                } else {
-                    $rootScope.$emit('wrongLoginInput');
-                    $rootScope.isLoggedIn = false;
-                }
-            });
+        if ($rootScope.isLoggedIn == false) {
+            $http.post('/log_in', {userName: uname, password: psw})
+                .then(function (response) {
+                    console.log(response);
+                    if (response.data.isRegistered == true) {
+                        $rootScope.$emit('loggedIn', {userId: response.data.userId, userName: uname});
+                        $rootScope.isLoggedIn = true;
+                        $rootScope.userId = response.data.userId;
+                        $location.path('/calendar');
+                    } else {
+                        $rootScope.$emit('wrongLoginInput');
+                        $rootScope.isLoggedIn = false;
+                    }
+                });
+        }
     }
 
     return {

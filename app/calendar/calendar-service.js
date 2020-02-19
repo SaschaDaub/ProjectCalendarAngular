@@ -18,6 +18,7 @@ angular.module('calendar').factory('calendarService', ['$rootScope', '$http', fu
     }
 
     function getGlobalArray() {
+        global_events = $rootScope.global_events;
         return global_events;
     }
 

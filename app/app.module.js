@@ -16,6 +16,8 @@ mainApp.run(function ($rootScope) {
     var isLoggedIn = JSON.parse(loggedIn);
     $rootScope.events_array = [];
     $rootScope.global_events = [];
+    $rootScope.polls_options_array = [];
+    $rootScope.polls_array = [];
 
     if(isLoggedIn) {
         var difference = appTimeStamp - isLoggedIn.timeStamp;

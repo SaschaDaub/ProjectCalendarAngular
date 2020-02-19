@@ -1,4 +1,38 @@
-<div id="logOutIconDiv" class="flex-container">
-    <i id="logOutIcon" class="fas fa-sign-out-alt"></i>
-    <label>sign-out</label>
+<i class="fas fa-plus" id="newPollIcon">
+    <span id="newPollText" title="Create a new Poll">Create Poll</span>
+</i>
+<div id="container">
+</div>
+<div id="holder">
+    <h3>Pending Polls</h3>
+    <div id="pendingPolls">
+    </div>
+</div>
+<div class="pollsModal" tabindex="-1" role="dialog" usage="">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create Poll</h5>
+                <button type="button" class="close btn-close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="pollsLabelWrapper">
+                    <label>title:</label>
+                </div>
+                <div id="pollsInputWrapper">
+                    <input type="text" id="newPollName">
+                </div>
+                <div id="newPollOptions"></div>
+                <i id="newPollOptionsAmount" class="fas fa-plus" title="Add Option"></i>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btn-confirm poll-confirm" ng-click="pollConfirm()">
+                    Confirm
+                </button>
+                <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>

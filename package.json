@@ -9,7 +9,7 @@
     "@fullcalendar/interaction": "^4.3.0",
     "@fullcalendar/list": "^4.3.0",
     "@fullcalendar/moment": "^4.3.0",
-    "angular": "^1.7.9",
+    "angular": "^1.8.0",
     "angular-route": "^1.7.9",
     "angular-ui-calendar": "^1.0.2",
     "animate": "^1.0.0",
